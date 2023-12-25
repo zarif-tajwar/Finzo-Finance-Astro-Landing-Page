@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body
+    class="bg-background font-helv text-text antialiased selection:bg-primary"
+  >
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import url("/fonts/helvetica-now-display/stylesheet.css");
+  @tailwind base;
+
+  @layer base {
+    :root {
+      --text: 0 0% 9%;
+      --background: 0 0% 100%;
+      --primary: 50 100% 60%;
+      --secondary: 218 15% 65%;
+      --outline: 0 0% 94%;
+    }
+
+    .container-main {
+      @apply mx-auto w-[min(80rem,100%-2*(var(--cont-px)))] [--cont-px:4rem];
+    }
+  }
+</style>
