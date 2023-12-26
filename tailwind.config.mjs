@@ -14,6 +14,9 @@ export default {
       fontFamily: {
         helv: ["Helvetica Now Display", ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        "3xl": "1920px",
+      },
     },
   },
   plugins: [],

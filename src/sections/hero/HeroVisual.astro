@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+---
+
+<div class="">
+  <div class="max-w-[40rem] aspect-[1.02] relative">
+    <div
+      class="w-[calc((294/786)*100%)] z-20 left-[calc((275/786)*100%)] top-0 absolute"
+    >
+      <Image
+        src={"/images/hero/iphone.png"}
+        width={667}
+        height={1662}
+        alt={"Finzo App in an IPhone."}
+      />
+    </div>
+    <div
+      class="w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] absolute"
+    >
+      <Image
+        src={"/images/hero/slice3.png"}
+        width={661}
+        height={1081}
+        alt={"A visa card of a finzo user!"}
+      />
+    </div>
+    <div
+      class="w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)]"
+    >
+      <Image
+        src={"/images/hero/slice2.png"}
+        width={592}
+        height={697}
+        alt={"One app for all!"}
+      />
+    </div>
+    <div
+      class="w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)]"
+    >
+      <Image
+        src={"/images/hero/slice1.png"}
+        width={592}
+        height={1004}
+        alt={"Secure payment!"}
+      />
+    </div>
+  </div>
+</div>
+
+<style></style>

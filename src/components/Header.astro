@@ -1,12 +1,48 @@
 ---
 import BrandIcon from "../components/BrandIcon.astro";
+import { cn } from "../util";
+import { buttonVariants } from "./Button.astro";
+
+const links = [
+  { label: "Products" },
+  { label: "Company" },
+  { label: "Features" },
+  { label: "Pricing" },
+  { label: "Support" },
+];
 ---
 
-<header class="h-32">
+<header class="h-[var(--nav-height)] relative">
   <nav class="container-main flex items-center h-full">
-    <span class="inline-flex gap-2 items-center"
-      ><BrandIcon />
-      <span class="font-bold text-2xl">Finzo</span>
-    </span>
+    <div class="flex justify-between w-full">
+      <span class="inline-flex gap-2 items-center"
+        ><BrandIcon />
+        <span class="font-bold text-2xl">Finzo</span>
+      </span>
+
+      <ul
+        class={cn(
+          "flex items-center"
+          // "absolute h-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        )}
+      >
+        {
+          links.map((linkItem) => {
+            return (
+              <li>
+                <a class={buttonVariants({ variant: "ghost" })} href="/">
+                  {linkItem.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <div>
+        <a href="/" class={buttonVariants({ variant: "ghost" })}>Login</a>
+        <a href="/" class={buttonVariants()}>Open Account</a>
+      </div>
+    </div>
   </nav>
 </header>
