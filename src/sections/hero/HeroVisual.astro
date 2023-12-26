@@ -1,11 +1,16 @@
 ---
 import { Image } from "astro:assets";
+import { cn } from "../../util";
 ---
 
 <div class="">
-  <div class="max-w-[40rem] aspect-[1.02] relative">
+  <div class="max-w-[36rem] aspect-[1.02] relative" data-hero-visual-parent>
     <div
-      class="w-[calc((294/786)*100%)] z-20 left-[calc((275/786)*100%)] top-0 absolute"
+      class={cn(
+        "w-[calc((294/786)*100%)] z-20 left-[calc((275/786)*100%)] top-0 absolute",
+        "translate-y-[20%] opacity-0"
+      )}
+      data-iphone
     >
       <Image
         src={"/images/hero/iphone.png"}
@@ -15,7 +20,11 @@ import { Image } from "astro:assets";
       />
     </div>
     <div
-      class="w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] absolute"
+      class={cn(
+        "w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] absolute",
+        "translate-y-[20%] scale-[0.7] opacity-0 origin-left"
+      )}
+      data-visa
     >
       <Image
         src={"/images/hero/slice3.png"}
@@ -25,7 +34,11 @@ import { Image } from "astro:assets";
       />
     </div>
     <div
-      class="w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)]"
+      class={cn(
+        "w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)]",
+        "translate-y-[20%] scale-[0.7] opacity-0 origin-left"
+      )}
+      data-oneapp
     >
       <Image
         src={"/images/hero/slice2.png"}
@@ -35,7 +48,11 @@ import { Image } from "astro:assets";
       />
     </div>
     <div
-      class="w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)]"
+      class={cn(
+        "w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)]",
+        "translate-y-[20%] scale-[0.7] opacity-0 origin-left"
+      )}
+      data-secure
     >
       <Image
         src={"/images/hero/slice1.png"}
@@ -48,3 +65,75 @@ import { Image } from "astro:assets";
 </div>
 
 <style></style>
+
+<script>
+  import {
+    animate,
+    animateStyle,
+    timeline,
+    type TimelineDefinition,
+  } from "motion";
+
+  const tlDef: TimelineDefinition = [
+    ["[data-iphone]", { y: "20%", opacity: 0 }, { duration: 0 }],
+    ["[data-visa]", { y: "20%", opacity: 0, scale: 0.7 }, { duration: 0 }],
+    ["[data-oneapp]", { y: "20%", opacity: 0, scale: 0.7 }, { duration: 0 }],
+    ["[data-secure]", { y: "20%", opacity: 0, scale: 0.7 }, { duration: 0 }],
+    ["[data-iphone]", { y: "0%", opacity: 1 }, { duration: 0.4 }],
+    ["[data-visa]", { y: "0%", opacity: 1, scale: 1 }, { duration: 0.4 }],
+    [
+      "[data-oneapp]",
+      { y: "0%", opacity: 1, scale: 1 },
+      { duration: 0.3, at: "-0.2" },
+    ],
+    [
+      "[data-secure]",
+      { y: "0%", opacity: 1, scale: 1 },
+      { duration: 0.3, at: "-0.2" },
+    ],
+  ];
+
+  timeline(tlDef);
+
+  const trigger = document.querySelector("[data-hero-visual-parent]");
+
+  trigger?.addEventListener("mouseenter", (e) => {
+    animate("[data-secure]", {
+      x: "-70%",
+      y: "-20%",
+    });
+    animate("[data-visa]", {
+      x: "50%",
+      y: "-5%",
+    });
+    animate("[data-oneapp]", {
+      x: "-110%",
+      y: "-50%",
+    });
+    animate("[data-iphone]", {
+      scale: 0.95,
+    });
+  });
+
+  trigger?.addEventListener("mouseleave", (e) => {
+    animate("[data-secure]", {
+      x: "0%",
+      y: "0%",
+    });
+    animate("[data-visa]", {
+      x: "0%",
+      y: "0%",
+    });
+    animate("[data-oneapp]", {
+      x: "0%",
+      y: "0%",
+    });
+    animate("[data-iphone]", {
+      scale: 1,
+    });
+  });
+
+  trigger?.addEventListener("mousemove", (e) => {
+    console.log(e);
+  });
+</script>
