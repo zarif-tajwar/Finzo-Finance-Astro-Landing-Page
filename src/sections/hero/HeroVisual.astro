@@ -30,7 +30,7 @@ import { cn } from "../../util";
         src={"/images/hero/slice3.png"}
         width={661}
         height={1081}
-        alt={"A visa card of a finzo user!"}
+        alt={"A visa trigger of a finzo user!"}
       />
     </div>
     <div
@@ -73,6 +73,8 @@ import { cn } from "../../util";
     timeline,
     type TimelineDefinition,
   } from "motion";
+  import { clamp, mapRange } from "../../util";
+  import { type HtmlElWithNull } from "../../types";
 
   const tlDef: TimelineDefinition = [
     ["[data-iphone]", { y: "20%", opacity: 0 }, { duration: 0 }],
@@ -95,7 +97,9 @@ import { cn } from "../../util";
 
   timeline(tlDef);
 
-  const trigger = document.querySelector("[data-hero-visual-parent]");
+  const trigger = document.querySelector(
+    "[data-hero-visual-parent]"
+  ) as HtmlElWithNull;
 
   trigger?.addEventListener("mouseenter", (e) => {
     animate("[data-secure]", {
@@ -133,7 +137,38 @@ import { cn } from "../../util";
     });
   });
 
-  trigger?.addEventListener("mousemove", (e) => {
-    console.log(e);
-  });
+  const init = () => {
+    if (!trigger) return;
+    const triggerRect = trigger.getBoundingClientRect();
+    const triggerX = triggerRect.left;
+    const triggerY = triggerRect.y;
+    const triggerW = triggerRect.width;
+    const triggerH = triggerRect.height;
+
+    trigger?.addEventListener("mousemove", (e: MouseEvent) => {
+      // const mouseX = clamp(e.clientX - triggerX, 0, triggerW);
+      // const mouseY = clamp(e.clientY - triggerY, 0, triggerH);
+      // console.log(mouseX);
+      // console.log(mouseY);
+      // const x = mapRange(mouseY, 0, triggerH, 0, 10);
+      // console.log(x);
+      // animate("[data-secure]", {
+      //   x: `-${70 + mapRange(mouseY, 0, triggerH, 0, 10)}%`,
+      //   y: "0%",
+      // });
+      // animate("[data-visa]", {
+      //   x: "0%",
+      //   y: "0%",
+      // });
+      // animate("[data-oneapp]", {
+      //   x: "0%",
+      //   y: "0%",
+      // });
+      // animate("[data-iphone]", {
+      //   scale: 1,
+      // });
+    });
+  };
+
+  init();
 </script>
