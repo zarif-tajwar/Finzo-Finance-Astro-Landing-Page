@@ -7,8 +7,8 @@ import { cn } from "../../util";
   <div class="max-w-[36rem] aspect-[1.02] relative" data-hero-visual-parent>
     <div
       class={cn(
-        "w-[calc((294/786)*100%)] z-20 left-[calc((275/786)*100%)] top-0 absolute",
-        "translate-y-[20%] opacity-0"
+        "w-[calc((294/786)*100%)] z-20 left-[calc((275/786)*100%)] top-0 absolute"
+        // "translate-y-[20%] opacity-0"
       )}
       data-iphone
     >
@@ -21,8 +21,8 @@ import { cn } from "../../util";
     </div>
     <div
       class={cn(
-        "w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] absolute",
-        "translate-y-[20%] scale-[0.7] opacity-0 origin-left"
+        "w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] origin-left absolute"
+        // "translate-y-[20%] scale-[0.7] opacity-0"
       )}
       data-visa
     >
@@ -35,8 +35,8 @@ import { cn } from "../../util";
     </div>
     <div
       class={cn(
-        "w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)]",
-        "translate-y-[20%] scale-[0.7] opacity-0 origin-left"
+        "w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)] origin-left"
+        // "translate-y-[20%] scale-[0.7] opacity-0"
       )}
       data-oneapp
     >
@@ -49,8 +49,8 @@ import { cn } from "../../util";
     </div>
     <div
       class={cn(
-        "w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)]",
-        "translate-y-[20%] scale-[0.7] opacity-0 origin-left"
+        "w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)] origin-left"
+        // "translate-y-[20%] scale-[0.7] opacity-0"
       )}
       data-secure
     >
@@ -67,108 +67,51 @@ import { cn } from "../../util";
 <style></style>
 
 <script>
-  import {
-    animate,
-    animateStyle,
-    timeline,
-    type TimelineDefinition,
-  } from "motion";
-  import { clamp, mapRange } from "../../util";
-  import { type HtmlElWithNull } from "../../types";
-
-  const tlDef: TimelineDefinition = [
-    ["[data-iphone]", { y: "20%", opacity: 0 }, { duration: 0 }],
-    ["[data-visa]", { y: "20%", opacity: 0, scale: 0.7 }, { duration: 0 }],
-    ["[data-oneapp]", { y: "20%", opacity: 0, scale: 0.7 }, { duration: 0 }],
-    ["[data-secure]", { y: "20%", opacity: 0, scale: 0.7 }, { duration: 0 }],
-    ["[data-iphone]", { y: "0%", opacity: 1 }, { duration: 0.4 }],
-    ["[data-visa]", { y: "0%", opacity: 1, scale: 1 }, { duration: 0.4 }],
-    [
-      "[data-oneapp]",
-      { y: "0%", opacity: 1, scale: 1 },
-      { duration: 0.3, at: "-0.2" },
-    ],
-    [
-      "[data-secure]",
-      { y: "0%", opacity: 1, scale: 1 },
-      { duration: 0.3, at: "-0.2" },
-    ],
-  ];
-
-  timeline(tlDef);
-
-  const trigger = document.querySelector(
-    "[data-hero-visual-parent]"
-  ) as HtmlElWithNull;
-
-  trigger?.addEventListener("mouseenter", (e) => {
-    animate("[data-secure]", {
-      x: "-70%",
-      y: "-20%",
-    });
-    animate("[data-visa]", {
-      x: "50%",
-      y: "-5%",
-    });
-    animate("[data-oneapp]", {
-      x: "-110%",
-      y: "-50%",
-    });
-    animate("[data-iphone]", {
-      scale: 0.95,
-    });
-  });
-
-  trigger?.addEventListener("mouseleave", (e) => {
-    animate("[data-secure]", {
-      x: "0%",
-      y: "0%",
-    });
-    animate("[data-visa]", {
-      x: "0%",
-      y: "0%",
-    });
-    animate("[data-oneapp]", {
-      x: "0%",
-      y: "0%",
-    });
-    animate("[data-iphone]", {
-      scale: 1,
-    });
-  });
-
-  const init = () => {
-    if (!trigger) return;
-    const triggerRect = trigger.getBoundingClientRect();
-    const triggerX = triggerRect.left;
-    const triggerY = triggerRect.y;
-    const triggerW = triggerRect.width;
-    const triggerH = triggerRect.height;
-
-    trigger?.addEventListener("mousemove", (e: MouseEvent) => {
-      // const mouseX = clamp(e.clientX - triggerX, 0, triggerW);
-      // const mouseY = clamp(e.clientY - triggerY, 0, triggerH);
-      // console.log(mouseX);
-      // console.log(mouseY);
-      // const x = mapRange(mouseY, 0, triggerH, 0, 10);
-      // console.log(x);
-      // animate("[data-secure]", {
-      //   x: `-${70 + mapRange(mouseY, 0, triggerH, 0, 10)}%`,
-      //   y: "0%",
-      // });
-      // animate("[data-visa]", {
-      //   x: "0%",
-      //   y: "0%",
-      // });
-      // animate("[data-oneapp]", {
-      //   x: "0%",
-      //   y: "0%",
-      // });
-      // animate("[data-iphone]", {
-      //   scale: 1,
-      // });
-    });
+  import { gsap } from "gsap";
+  const selectors = {
+    parent: "[data-hero-visual-parent]",
+    iphone: "[data-iphone]",
+    visa: "[data-visa]",
+    oneapp: "[data-oneapp]",
+    secure: "[data-secure]",
   };
 
-  init();
+  const tl = gsap.timeline();
+
+  tl.from(selectors.iphone, {
+    yPercent: 20,
+    opacity: 0,
+    ease: "back.out",
+    duration: 0.4,
+  })
+    .from(
+      selectors.secure,
+      {
+        yPercent: 30,
+        opacity: 0,
+        ease: "back.out",
+        duration: 0.4,
+      },
+      "-=0.2"
+    )
+    .from(
+      selectors.oneapp,
+      {
+        scale: 0.5,
+        opacity: 0,
+        ease: "back.out",
+        duration: 0.4,
+      },
+      "-=0.3"
+    )
+    .from(
+      selectors.visa,
+      {
+        scale: 0.5,
+        opacity: 0,
+        duration: 0.4,
+        ease: "back.out",
+      },
+      "-=0.1"
+    );
 </script>
