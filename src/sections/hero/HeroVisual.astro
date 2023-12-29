@@ -64,10 +64,15 @@ import { cn } from "../../util";
   </div>
 </div>
 
-<style></style>
+<style>
+  /* [data-hero-visual-parent] {
+    perspective: 1000px;
+  } */
+</style>
 
 <script>
   import { gsap } from "gsap";
+  import { Observer } from "gsap/Observer";
   const selectors = {
     parent: "[data-hero-visual-parent]",
     iphone: "[data-iphone]",
@@ -75,6 +80,8 @@ import { cn } from "../../util";
     oneapp: "[data-oneapp]",
     secure: "[data-secure]",
   };
+
+  gsap.registerPlugin(Observer);
 
   const tl = gsap.timeline();
 
@@ -114,4 +121,75 @@ import { cn } from "../../util";
       },
       "-=0.1"
     );
+
+  // const visaX = gsap.quickTo(selectors.visa, "xPercent");
+
+  const quickTo = {
+    visaX: gsap.quickTo(selectors.visa, "xPercent", {
+      duration: 0.5,
+      ease: "power4",
+    }),
+    visaY: gsap.quickTo(selectors.visa, "yPercent", {
+      duration: 0.5,
+      ease: "power4",
+    }),
+    oneappX: gsap.quickTo(selectors.oneapp, "xPercent", {
+      duration: 0.5,
+      ease: "power4",
+    }),
+    oneappY: gsap.quickTo(selectors.oneapp, "yPercent", {
+      duration: 0.5,
+      ease: "power4",
+    }),
+    secureX: gsap.quickTo(selectors.secure, "xPercent", {
+      duration: 0.5,
+      ease: "power4",
+    }),
+    secureY: gsap.quickTo(selectors.secure, "yPercent", {
+      duration: 0.5,
+      ease: "power4",
+      delay: 0.5,
+    }),
+  };
+
+  Observer.create({
+    target: selectors.parent,
+    onMove: (e) => {
+      if (!e.x || !e.y) return;
+
+      const boundingBox = e.target.getBoundingClientRect();
+      const parentW = boundingBox.width;
+      const parentH = boundingBox.height;
+      const mouseX = e.x - boundingBox.x;
+      const mouseY = e.y - boundingBox.y;
+      console.log(mouseX);
+      console.log(mouseY);
+      quickTo.visaX(gsap.utils.mapRange(0, parentW, 45, 55, mouseX));
+      quickTo.visaY(gsap.utils.mapRange(0, parentH, -15, 15, mouseY));
+      quickTo.oneappX(gsap.utils.mapRange(0, parentW, -180, -150, mouseX));
+      quickTo.oneappY(gsap.utils.mapRange(0, parentH, -40, -30, mouseY));
+      quickTo.secureX(gsap.utils.mapRange(0, parentW, -80, -60, mouseX));
+      quickTo.secureY(gsap.utils.mapRange(0, parentH, -30, -15, mouseY));
+    },
+    onHoverEnd: () => {
+      quickTo.visaX(0);
+      quickTo.visaY(0);
+      quickTo.oneappX(0);
+      quickTo.oneappY(0);
+      quickTo.secureX(0);
+      quickTo.secureY(0);
+      gsap.to(selectors.iphone, {
+        scale: 1,
+        duration: 0.4,
+        ease: "power4.out",
+      });
+    },
+    onHover: () => {
+      gsap.to(selectors.iphone, {
+        scale: 0.9,
+        duration: 0.4,
+        ease: "power4.out",
+      });
+    },
+  });
 </script>
