@@ -21,7 +21,7 @@ import { cn } from "../../util";
     </div>
     <div
       class={cn(
-        "w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] origin-left absolute"
+        "w-[calc((292.86/786)*100%)] z-40 left-[calc((443/786)*100%)] top-[calc((104/771)*100%)] origin-left absolute drop-shadow-sm"
         // "translate-y-[20%] scale-[0.7] opacity-0"
       )}
       data-visa
@@ -35,7 +35,7 @@ import { cn } from "../../util";
     </div>
     <div
       class={cn(
-        "w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)] origin-left"
+        "w-[calc((153.61/786)*100%)] z-30 absolute left-[calc((265/786)*100%)] top-[calc((163/771)*100%)] origin-left drop-shadow-sm"
         // "translate-y-[20%] scale-[0.7] opacity-0"
       )}
       data-oneapp
@@ -49,7 +49,7 @@ import { cn } from "../../util";
     </div>
     <div
       class={cn(
-        "w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)] origin-left"
+        "w-[calc((167.22/786)*100%)] z-10 absolute left-[calc((181/786)*100%)] top-[calc((325/771)*100%)] origin-left drop-shadow-sm"
         // "translate-y-[20%] scale-[0.7] opacity-0"
       )}
       data-secure
@@ -165,7 +165,7 @@ import { cn } from "../../util";
       console.log(mouseX);
       console.log(mouseY);
       quickTo.visaX(gsap.utils.mapRange(0, parentW, 45, 55, mouseX));
-      quickTo.visaY(gsap.utils.mapRange(0, parentH, -15, 15, mouseY));
+      quickTo.visaY(gsap.utils.mapRange(0, parentH, -20, 20, mouseY));
       quickTo.oneappX(gsap.utils.mapRange(0, parentW, -180, -150, mouseX));
       quickTo.oneappY(gsap.utils.mapRange(0, parentH, -40, -30, mouseY));
       quickTo.secureX(gsap.utils.mapRange(0, parentW, -80, -60, mouseX));

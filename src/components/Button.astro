@@ -2,34 +2,37 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../util";
 
-export const buttonVariants = cva("inline-flex gap-2 text-sm font-bold w-max", {
-  variants: {
-    variant: {
-      default: "bg-text text-background",
-      secondary: "bg-primary text-text",
-      outline: "bg-background text-text ring-inset ring-2 ring-outline",
-      ghost: "bg-transparent text-text",
+export const buttonVariants = cva(
+  "inline-flex gap-2 text-sm font-bold w-max focus-visible:outline-2 focus-visible:outline-text focus-visible:outline-offset-2 focus-visible:outline-dashed",
+  {
+    variants: {
+      variant: {
+        default: "bg-text text-background",
+        secondary: "bg-primary text-text focus-visible:outline-primary",
+        outline: "bg-background text-text ring-inset ring-2 ring-outline",
+        ghost: "bg-transparent text-text focus-visible:outline-offset-0",
+      },
+      size: {
+        default: "px-5 py-3",
+        lg: "px-10 py-4",
+      },
+      roundness: {
+        default: "rounded-full",
+        secondary: "rounded-xl",
+      },
+      align: {
+        center: "justify-center",
+        left: "justify-start",
+      },
     },
-    size: {
-      default: "px-5 py-3",
-      lg: "px-10 py-4",
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      roundness: "default",
+      align: "center",
     },
-    roundness: {
-      default: "rounded-full",
-      secondary: "rounded-xl",
-    },
-    align: {
-      center: "justify-center",
-      left: "justify-start",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-    roundness: "default",
-    align: "center",
-  },
-});
+  }
+);
 
 export interface Props
   extends astroHTML.JSX.ButtonHTMLAttributes,
